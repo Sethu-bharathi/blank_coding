@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/static/css/main.77681013.css",
+    "main.js": "/static/js/main.765c3dc6.js",
+    "static/media/small.jpg": "/static/media/small.0a7315ac54e366f4aad6.jpg",
+    "static/media/hero_fallback__9nzgyrk0lwim_large.jpg": "/static/media/hero_fallback__9nzgyrk0lwim_large.946fbf811c80f97479d1.jpg",
+    "index.html": "/index.html",
+    "main.77681013.css.map": "/static/css/main.77681013.css.map",
+    "main.765c3dc6.js.map": "/static/js/main.765c3dc6.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.77681013.css",
+    "static/js/main.765c3dc6.js"
+  ]
+}
