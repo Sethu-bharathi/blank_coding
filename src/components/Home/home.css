@@ -1,0 +1,73 @@
+
+.navbelow{
+    width: 100%;
+    padding: 0 100px;
+    margin-top: 5rem;
+    height:40px;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 2px 2px rgba(0,0,0,1);
+    box-sizing: border-box;
+    padding-bottom: 10px;
+    overflow: visible;
+}
+.text{
+    width:auto;
+    font-size: 2rem;
+    font-family: 'DM Sans';
+    
+    overflow: visible;
+}
+
+.rowleft{
+    width:500px;
+    display: flex;
+    gap:1.2rem;
+}
+.rowleft div{
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+.btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:70px;
+    background-color: #1f7ae0;
+    border-radius: 18px;
+}
+.heading{
+    font-size: 10rem;
+    font-family: DM Sans;
+    text-align: center;
+}
+.container{
+    width: 1440px;
+    height: 774px;
+    background-size: 1440px 774px;
+    background-repeat: no-repeat;
+    position: relative;
+    left: 50%;
+    margin-left: -720px;
+    position: relative;
+    display: block;
+    min-width: 100%;
+    opacity: 1;
+    margin-top: 20px;
+    background-image: url("../../../public/Images/hero_fallback__9nzgyrk0lwim_large.jpg") !important;
+}
+@media screen  and (max-width:767px) {
+    .heading{
+        font-size: 5rem;
+    }
+    .container{    
+        width: 100%;
+        height: 539px;
+        background-size: contain;
+        background-position: center;
+        left: auto;
+        margin: 0 auto;
+        background-image: url("../../../public/Images/small.jpg") !important;
+    }
+}

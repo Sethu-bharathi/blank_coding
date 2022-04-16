@@ -1,14 +1,12 @@
-import app from "./firebase.js"
+
 import './App.css';
-import SignupPage from "./components/screens/Signuppage.js";
-// import {getFirestore} from 'firebase/firestore/lite'
-// import {getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword} from 'firebase/auth';
+import Home from "./components/Home/home.js";
 
 function App() {
   
   return (
     <div>
-      <SignupPage />
+      <Home />
     </div>
   );
 }
