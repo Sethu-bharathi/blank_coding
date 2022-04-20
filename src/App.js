@@ -1,12 +1,14 @@
 
 import './App.css';
-import Home from "./components/Home/home.js";
+import Complaint from './components/Complaint/Complaint';
+import SignupHospital from './components/SignupHospital/signupHospital';
+import LoginHospital from './components/LoginHospital/Loginhospital';
 
 function App() {
   
   return (
     <div>
-      <Home />
+      <Complaint />
     </div>
   );
 }

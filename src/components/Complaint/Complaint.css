@@ -1,0 +1,80 @@
+
+.container{
+    background: url("../../Assets/hands-medical-doctor.jpg");
+    backdrop-filter: brightness(0.5);
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: grey;
+}
+
+.flex-box{
+    display: flex;
+    flex-direction: row;
+    padding: 100px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 6px;
+    backdrop-filter: blur(30%);
+}
+.row-box{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+.complaint-form{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap:2rem;
+    justify-content: center;
+    align-items: center;
+    overflow: visible;
+}
+
+.complaint-form input, .complaint-form textarea{
+    outline: none;
+    border: none;
+    border-radius: 0px;
+    padding: 5px 8px;
+    background-color: #87d2de;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+.complaint-form input::placeholder, .complaint-form textarea::placeholder{
+    color:#000;
+    font-weight: 900;
+    font-family: "Comfortaa";
+    text-align: center;
+}
+input[type="file"]{
+    border: none  ;
+}
+.file{
+    text-align: start;
+    align-self: flex-start;
+    margin-left: 20px;
+font-size: 18px;}
+
+.btn{
+    position: absolute !important;
+    bottom:-50px;
+
+}
+
+@media screen and (max-width:787px){
+    .container{
+        height: auto;
+    }
+    .flex-box{
+        background-color:rgba(255, 255, 255, 0.3) ;
+    }
+    .complaint-form{
+        flex-direction: column;
+        gap:0;
+    }
+}
