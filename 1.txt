@@ -1,0 +1,314 @@
+1)Chi-Square(Inbuilt):
+from sklearn.feature_selection import chi2
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
+df = pd.read_csv('SampleData.csv')
+
+# Resultant Dataframe will be a dataframe where the column names and Index will be the same
+# This is a matrix similar to correlation matrix which we get after df.corr()
+# Initialize the values in this matrix with 0
+resultant = pd.DataFrame(data=[(0 for i in range(len(df.columns))) for i in range(len(df.columns))], 
+                         columns=list(df.columns))
+resultant.set_index(pd.Index(list(df.columns)), inplace = True)
+
+# Finding p_value for all columns and putting them in the resultant matrix
+for i in list(df.columns):
+    for j in list(df.columns):
+        if i != j:
+            chi2_val, p_val = chi2(np.array(df[i]).reshape(-1, 1), np.array(df[j]).reshape(-1, 1))
+            resultant.loc[i,j] = p_val
+print(resultant)
+fig = plt.figure(figsize=(6,6))
+sns.heatmap(resultant, annot=True, cmap='Blues')
+plt.title('Chi-Square Test Results')
+plt.show()
+
+
+
+2)Chi-Square(Manual):
+import scipy.stats as stats
+import seaborn as sns
+import pandas as pd
+import numpy as np
+dataset=sns.load_dataset('tips')
+dataset.head()
+dataset_table=pd.crosstab(dataset['sex'],dataset['smoker'])
+print(dataset_table)
+dataset_table.values 
+Observed_Values = dataset_table.values 
+print("Observed Values :-\n",Observed_Values)
+val=stats.chi2_contingency(dataset_table)
+val
+Expected_Values=val[3]
+no_of_rows=len(dataset_table.iloc[0:2,0])
+no_of_columns=len(dataset_table.iloc[0,0:2])
+ddof=(no_of_rows-1)*(no_of_columns-1)
+print("Degree of Freedom:-",ddof)
+alpha = 0.05
+from scipy.stats import chi2
+chi_square=sum([(o-e)**2./e for o,e in zip(Observed_Values,Expected_Values)])
+chi_square_statistic=chi_square[0]+chi_square[1]
+print("chi-square statistic:-",chi_square_statistic)
+critical_value=chi2.ppf(q=1-alpha,df=ddof)
+print('critical_value:',critical_value)
+p_value=1-chi2.cdf(x=chi_square_statistic,df=ddof)
+print('p-value:',p_value)
+print('Significance level: ',alpha)
+print('Degree of Freedom: ',ddof)
+print('p-value:',p_value)
+if chi_square_statistic>=critical_value:
+    print("Reject H0,There is a relationship between 2 categorical variables")
+else:
+    print("Retain H0,There is no relationship between 2 categorical variables")
+    
+if p_value<=alpha:
+    print("Reject H0,There is a relationship between 2 categorical variables")
+else:
+    print("Retain H0,There is no relationship between 2 categorical variables")
+
+
+
+3)Anova(ashwin):
+from sklearn.feature_selection import SelectKBest
+from sklearn.feature_selection import f_classif
+import pandas as pd
+#input nuerical, output categorical
+dataset=pd.read_csv("weatherHistory.csv")
+print(dataset)
+#storing and removing the output class from the dataset
+TargetClass = dataset[["Summary"]]
+dataset.pop("Summary")
+print(dataset) #after removal of output class
+featureSelection = SelectKBest(score_func=f_classif, k=3) #no. of features to be reduced
+Feature_selected = featureSelection.fit_transform(dataset, TargetClass["Summary"])
+print("Original dataset : ",dataset.shape)
+print("Features Selected Dataset : ",Feature_selected.shape)
+Feature_selected #feature that are selected after peforming anova
+
+
+
+4)One-way Anova:
+import seaborn as sns
+df1.head()
+df_anova = df1[['petal_width','species']]
+grps = pd.unique(df_anova.species.values)
+grps
+d_data = {grp:df_anova['petal_width'][df_anova.species == grp] for grp in grps}
+d_data
+F, p = stats.f_oneway(d_data['setosa'], d_data['versicolor'], d_data['virginica'])
+print(p)
+if p<0.05:
+    print("reject null hypothesis")
+else:
+    print("accept null hypothesis")
+
+
+
+5)Anova(General):
+import pandas as pd
+from matplotlib import pyplot
+from sklearn.preprocessing import OrdinalEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.feature_selection import SelectKBest
+from sklearn.feature_selection import f_classif
+
+# load the dataset as a pandas DataFrame
+data = pd.read_csv("cs1.csv")
+# retrieve numpy array
+data.head()
+
+data = data.dropna()
+print(data)
+
+X = data.iloc[:,0:25]
+X = pd.get_dummies(X)
+y = data.iloc[:,-1]
+#y = pd.get_dummies(y)
+print(X)
+print(y)
+
+def SelectFeatures(X_train,y_train,X_test):
+  fs=SelectKBest(score_func=f_classif,k=2)
+  fs.fit(X_train,y_train)
+  X_train_fs=fs.transform(X_train)
+  X_test_fs=fs.transform(X_test)
+  return X_train_fs,X_test_fs,fs
+
+X_test,X_train,y_test,y_train=train_test_split(X,y,test_size=0.33,random_state=1)
+X_train_fs,X_test_fs,fs=SelectFeatures(X_train,y_train,X_test)
+
+for i in range(len(fs.scores_)):
+    if (fs.scores_[i]>=10):
+        print('Feature %d: %f' % (i, fs.scores_[i]))
+
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+
+model = LogisticRegression(solver='liblinear')
+model.fit(X_train_fs, y_train)
+# evaluate the model
+yhat = model.predict(X_test_fs)
+# evaluate predictions
+accuracy = accuracy_score(y_test, yhat)
+print('Accuracy: %.2f' % (accuracy*100))
+
+
+
+6)Pearson:
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy.stats import pearsonr
+df=pd.read_csv(r'C:\Users\vijay s\Desktop\exp3_ml.csv')
+df
+
+df.corr()
+
+corr1,_=pearsonr(df['diabetes'],df['heartdiseaseorattack']) 
+print(format(corr1,".3f"))
+
+col=[i for i in df]
+arr=df.corr()
+
+for i in arr:
+    for j in range(len(arr)):
+        if arr[i][j]>.5 and arr[i][j]!=1:
+            print(i,col[j],arr[i][j])
+
+def findSum(x,meanX,y,meanY):
+  x=x-meanX
+  y=y-meanY
+  product = x*y
+  sum=0
+  for i in product:
+    sum=sum+i
+  return sum
+
+def findSumOfSquare(x,meanX,y,meanY):
+  x=x-meanX
+  y=y-meanY
+  x=x**2
+  y=y**2
+  sumX=0
+  for i in x:
+    sumX=sumX+i
+  sumY=0
+  for i in y:
+    sumY=sumY+i
+  return sumX*sumY
+
+def findMean(x):
+  meanX = 0
+  for i in x:
+    meanX=meanX+i
+  meanX=meanX/len(x)
+  return meanX
+
+def findCorrelation(x,y):
+  meanX = findMean(x)
+  meanY = findMean(y)
+  q = findSum(x,meanX,y,meanY)
+  d= np.sqrt(findSumOfSquare(x,meanX,y,meanY))
+  return q/d
+
+findCorrelation(np.array(df["highbp"]),np.array(df["age"]))
+
+arr = []
+for i in df:
+  row=[ findCorrelation(np.array(df[i]),np.array(df[j])) for j in df ]
+  arr.append(row)
+plt.subplots(figsize=(15, 15))
+sns.heatmap(arr, annot = True)
+
+plt.subplots(figsize=(15, 15))
+sns.heatmap(arr, annot = True)
+
+
+
+7)Bayesian:
+import pandas as pd
+import numpy as np
+import matplotlib as plt
+
+df=pd.read_csv("C:/Users/vijay s/Desktop/classification.csv")
+df
+
+df.info()
+
+m=0
+nm=0
+for i in range(0,20):
+    if df.Class[i]=='mammals':
+        m=m+1
+    else:
+        nm=nm+1
+
+gbym=0
+gbynm=0
+for i in range(0,20):
+    if df.Give_Birth[i]=='yes':
+        if df.Class[i]=='mammals':
+            gbym=gbym+1
+        else:
+            gbynm=gbynm+1
+
+am=((gbym/m)*(cfnm/m)*(liwym/m)*(hlnm/m))
+anm=((gbynm/nm)*(cfnnm/nm)*(liwynm/nm)*(hlnnm/nm))
+
+x,y=am/(am+anm),anm/(am+anm)
+print(x)
+print(y)
+if x>y:
+    print("X belongs to class 'mammals'")
+else:
+    print("X belongs to class 'non-mammals'")
+
+
+
+8)Kendall:
+from numpy.random import rand
+from numpy.random import seed
+from scipy.stats import kendalltau
+import pandas as pd
+seed(1)
+#input numerical, output categorical
+dataset=pd.read_csv("weatherHistory.csv")
+print(dataset)
+#storing and removing the output class from the dataset
+TargetClass = dataset[["Summary"]]
+dataset.pop("Summary")
+print("after removal:\n",dataset) #after removal of output class
+arr=["Temperature (C)","Apparent Temperature (C)",
+"Humidity","Wind Speed (km/h)","Wind Bearing (degrees)",
+"Visibility (km)","Pressure (millibars)"]
+attr=[]
+temp=dataset[[arr[0]]]
+attr.append(temp)
+Atemp=dataset[[arr[1]]]
+attr.append(Atemp)
+Humid=dataset[[arr[2]]]
+attr.append(Humid)
+WindSpeed=dataset[[arr[3]]]
+attr.append(WindSpeed)
+WindBearing=dataset[[arr[4]]]
+attr.append(WindBearing)
+visibility=dataset[[arr[5]]]
+attr.append(visibility)
+pressure=dataset[[arr[6]]]
+attr.append(pressure)
+for i in range(len(attr)-1):
+   for j in range(i+1,len(attr)):
+      print(arr[i]," --> ",arr[j])
+      corr, p = kendalltau(attr[i],attr[j])
+      print("Kendall Rank Correlation : ",corr)
+      print("Probability against null hypothesis(p) : ",p) # probability that measures the evidence against the null hypothesis
+      alpha = 0.05
+      if p > alpha: 
+         print('Samples are uncorrelated (fail to reject H0) p=%.3f' % p)
+      else: 
+         print('Samples are correlated (reject H0) p=%.3f' % p)
+      print("\n")
