@@ -6,12 +6,13 @@ import LoginHospital from './components/LoginHospital/Loginhospital';
 import Feedback from './components/Feedback/feedback';
 import HospitalProfile from './components/HospitalProfile/hospitalprofile';
 import Billing from './components/Billing/Billing';
+import PatientRegister from './components/Patientregister/PatientRegister';
 
 function App() {
   
   return (
     <div>
-      <Billing />
+      <PatientRegister />
     </div>
   );
 }
