@@ -11,7 +11,7 @@ function App() {
   
   return (
     <div>
-      <HospitalProfile />
+      <Billing />
     </div>
   );
 }

@@ -1,6 +1,129 @@
+.container1 {
+  min-height: 100vh;
+  min-width: 100vw;
+  background: #e7e3db  ;
+  display: flex;
+}
+.leftcard {
+  height: 100vh;
+  width: min(350px, 30%);
+  border-radius: 7%;
+  border-right: solid 9px #0aa3ba;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.rightcard {
+  height: 100vh;
+  width: min(1000px, 70%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: scroll;
+  overflow-x: hidden;
+}
 
-.container1{
-    min-height:100vh;
-    min-width:100vw;
-    background-color: #E6F9FA;
+.topic {
+  margin-left: 50px;
+}
+.textcard {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: space-between;
+}
+.textcard p {
+  height: 30px;
+  border-bottom: #0aa3ba 2px solid;
+}
+
+.first {
+  width: 100px;
+  text-align: center;
+}
+.second {
+  width: 220px;
+  text-align: center;
+}
+.third {
+  width: 150px;
+  text-align: center;
+}
+.fourth {
+  width: 100px;
+  text-align: center;
+}
+.odd {
+  width: auto;
+  background-color: #edf0ed;
+}
+
+.firstinput {
+  text-align: center;
+  padding: 0;
+  margin-top: 4.7px;
+  background-color: transparent;
+  border-bottom: 1.2px solid black;
+  border-radius: 0;
+  width: 100px;
+}
+.secondinput {
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border-bottom: 1.2px solid black;
+  border-radius: 0;
+  width: 220px;
+}
+.thirdinput {
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border-bottom: 1.2px solid black;
+  border-radius: 0;
+  width: 150px;
+}
+.fourthinput {
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border-bottom: 1.2px solid black;
+  border-radius: 0;
+  width: 100px;
+}
+
+.firstinput:focus,
+.secondinput:focus,
+.thirdinput:focus,
+.fourthinput:focus {
+  outline: none;
+}
+.fab {
+  position: absolute;
+  bottom: -70vh;
+  right: 180px;
+}
+.fab:hover {
+  cursor: pointer;
+  background-color: #0aa3ba;
+}
+
+.totalprice {
+  margin-top: 10px;
+  font-size: 18px;
+  align-self: flex-end;
+  margin-right: 280px;
+  font-weight: 500;
+  text-transform: uppercase;
+  background-color: rgb(35, 34, 34);
+  color: white;
+  padding: 4px;
+}
+.printbutton {
+  margin-top: 70px !important;
+  height: 40px;
+  width: 150px;
+  align-self: center;
 }
