@@ -1,0 +1,30 @@
+.page{
+    display: flex;
+    background-color:cornsilk;
+    justify-items: center;
+    align-items: center;
+}
+
+.left-page{
+    height:300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width:200px;
+    gap:20px;
+    background-color: gray;
+    box-sizing: border-box;
+    padding-left: 50px;
+}
+
+.right-page{
+    height:300px;
+    gap:20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width:400px;
+    background-color: gray;
+    box-sizing: border-box;
+    padding-left: 50px;
+}
